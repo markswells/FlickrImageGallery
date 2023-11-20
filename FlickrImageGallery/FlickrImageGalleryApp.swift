@@ -11,7 +11,7 @@ import SwiftUI
 struct FlickrImageGalleryApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FlickrSearchView(viewModel: FlickrSearchViewModel())
         }
     }
 }

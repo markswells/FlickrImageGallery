@@ -17,14 +17,21 @@ final class FlickrImageGalleryTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testSearchPorcupine() async throws {
+        try await searchAsync(tags: "porcupine")
     }
+
+    func searchAsync(tags: String) async throws {
+        let photosResponse = await Network.shared.search(tags)
+        XCTAssertNotNil(photosResponse, "Nil response received fetching photos")
+        if let response = photosResponse {
+            XCTAssert(!response.title.isEmpty, "Photos response returned but indicated failure")
+            let numPhotos = response.items.count
+            XCTAssert(numPhotos > 0, "Incorrect number of photos received")
+        }
+    }
+
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
