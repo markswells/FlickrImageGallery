@@ -11,13 +11,13 @@ class FlickrAPI {
     
     public static var shared = FlickrAPI()
     
-    private let baseUrl = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags="
+    private let searchUrl = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags="
     
     private init() {}
     
     public func search(_ tags: String) async -> SearchResponse? {
         
-        let urlString = baseUrl + tags
+        let urlString = searchUrl + tags
         guard let url = URL(string: urlString) else {
             print("Invalid URL: \(urlString)")
             return nil

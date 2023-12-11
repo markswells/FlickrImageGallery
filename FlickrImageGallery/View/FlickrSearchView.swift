@@ -70,7 +70,7 @@ class FlickrSearchViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func flickrSearch() {
+    public func flickrSearch() {
         images = []
         if debouncedSearchTerm.count >= minimumSearchTermCharacters {
             Task {
