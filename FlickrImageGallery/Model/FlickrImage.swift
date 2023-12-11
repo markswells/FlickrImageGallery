@@ -16,12 +16,6 @@ struct FlickrImage : Decodable, Identifiable, Hashable {
     let dateTaken: Date
     let datePublished: Date
     
-    var formattedDatePublished: String {
-        let df = DateFormatter()
-        df.dateStyle = .short
-        return df.string(from: datePublished)
-    }
-    
     enum CodingKeys: String, CodingKey {
         case title
         case link
@@ -45,7 +39,12 @@ struct FlickrImage : Decodable, Identifiable, Hashable {
         self.dateTaken = try container.decode(Date.self, forKey: .dateTaken)
         self.datePublished = try container.decode(Date.self, forKey: .datePublished)
         let mediaContainer = try container.nestedContainer(keyedBy: CodingKeys.MediaCodingKeys.self, forKey: .media)
-        self.url = try URL(string: mediaContainer.decode(String.self, forKey: .m))!
+        if let url = try URL(string: mediaContainer.decode(String.self, forKey: .m)) {
+            self.url = url
+        }
+        else {
+            throw URLError(.badURL)
+        }
     }
     
     var id: URL {

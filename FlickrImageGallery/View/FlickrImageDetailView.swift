@@ -30,7 +30,7 @@ struct FlickrImageDetailView: View {
                 .font(.caption)
                 .fontWeight(.bold)
                 .padding(.bottom, 20)
-            Text("Published: \(photo.formattedDatePublished)")
+            Text("Published: \(DateFormatters.shared.flickrImageDateFormatter.string(from: photo.datePublished))")
                 .font(.caption)
             Text("Original image size: \(String.init(describing: imageSize))")
                 .font(.caption)

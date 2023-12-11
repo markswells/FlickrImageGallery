@@ -28,6 +28,7 @@ struct FlickrSearchView: View {
                                 .aspectRatio(1, contentMode: .fit)
                             }
                         }
+                        .padding([.leading, .trailing], 10)
                     }
                 }
                 else {
@@ -73,7 +74,7 @@ class FlickrSearchViewModel: ObservableObject {
         images = []
         if debouncedSearchTerm.count >= minimumSearchTermCharacters {
             Task {
-                if let response = await Network.shared.search(debouncedSearchTerm) {
+                if let response = await FlickrAPI.shared.search(debouncedSearchTerm) {
                     latestResponse = response
                     DispatchQueue.main.async { [weak self] in
                         self?.images.append(contentsOf: response.items)

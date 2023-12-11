@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-class Network {
+class FlickrAPI {
     
-    public static var shared = Network()
+    public static var shared = FlickrAPI()
     
     private let baseUrl = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags="
     

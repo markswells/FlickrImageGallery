@@ -23,7 +23,7 @@ final class FlickrImageGalleryTests: XCTestCase {
     }
 
     func searchAsync(tags: String) async throws {
-        let photosResponse = await Network.shared.search(tags)
+        let photosResponse = await FlickrAPI.shared.search(tags)
         XCTAssertNotNil(photosResponse, "Nil response received fetching photos")
         if let response = photosResponse {
             XCTAssert(!response.title.isEmpty, "Photos response returned but indicated failure")
